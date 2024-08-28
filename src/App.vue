@@ -17,8 +17,10 @@ onMounted(() => {
         return;
       }
       const res = await liff.value.getProfile();
-      userdetail.value.pictureUrl = res.pictureUrl;
-      userdetail.value.displayName = res.displayName;
+      userdetail.value = {
+        pictureUrl: res.pictureUrl,
+        displayName: res.displayName,
+      };
     });
 });
 </script>
