@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
 const liff = ref(null);
+const userdetail = ref(null);
 onMounted(() => {
   window.liff
     .init({
@@ -16,12 +16,25 @@ onMounted(() => {
         liff.value.login();
         return;
       }
-      console.log(await liff.value.getProfile());
+      const res = await liff.value.getProfile();
+      userdetail.value.pictureUrl = res.pictureUrl;
+      userdetail.value.displayName = res.displayName;
     });
 });
 </script>
 
-<template>liff website</template>
+<template>
+  liff website
+  <br />
+  สวัสดี &nbsp;
+  {{ userdetail?.displayName }}
+  <br />
+  <img
+    v-if="userdetail && userdetail.pictureUrl"
+    :src="userdetail?.pictureUrl"
+    alt=""
+  />
+</template>
 
 <style scoped>
 .logo {
